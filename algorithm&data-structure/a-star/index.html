@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+	<style type="text/css">
+		canvas {
+			border: dashed 2px #CCC
+		}
+	</style>
+</head>
+
+<body>
+	start:
+	<input id='st' type="text" name="first_name" value='5'> end:
+	<input id='ed' type="text" name="last_name" value='5000'>
+	<button id='sub' type="submit" value="Submit">绘制</button>
+	<br>
+
+	<canvas id="can" width="1800px" height="1200px"></canvas>
+	<script type="text/javascript">
+		var can = document.getElementById('can');
+		var cans = can.getContext('2d');
+	</script>
+
+	<script>
+		$(function() {
+			$("#sub").click(function() {
+				url = 'http://127.0.0.1:8082/process_get?start=' + $('#st').val() + '&&end=' + $('#ed').val();
+				console.log(url);
+				jQuery.ajax({
+					url: url,
+					type: 'GET',
+					dataType: 'jsonp',
+					complete: function(xhr, textStatus) {
+						//called when complete
+					},
+					success: function(data, textStatus, xhr) {
+						console.log(data)
+							//called when successful
+						for (var item in data) {
+							var temp = data[item].toString().split(';');
+							var lineFrom = temp[0].split(',');
+							var lineTo = temp[1].split(',');
+							var large = 3;
+							if (temp.length > 2) {
+								if (temp[2] == 'red') {
+									cans.strokeStyle = "#FF0000";
+									cans.beginPath();
+									cans.moveTo(lineFrom[0] / large, lineFrom[1] / large);
+									cans.lineTo(lineTo[0] / large, lineTo[1] / large);
+									cans.stroke();
+								} else {
+									cans.strokeStyle = "blue";
+									cans.beginPath();
+									cans.moveTo(lineFrom[0] / large, lineFrom[1] / large);
+									cans.lineTo(lineTo[0] / large, lineTo[1] / large);
+									cans.stroke();
+								}
+							} else {
+								cans.strokeStyle = "#74EF21";
+								cans.beginPath();
+								cans.moveTo(lineFrom[0] / large, lineFrom[1] / large);
+								cans.lineTo(lineTo[0] / large, lineTo[1] / large);
+								cans.stroke();
+							}
+
+						}
+					},
+					error: function(xhr, textStatus, errorThrown) {
+						//called when there is an error
+					}
+				});
+			});
+		});
+	</script>
+</body>
+
+</html>
