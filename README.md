@@ -7,6 +7,6 @@
 
 ### 知识索引
 -----
-| Chapter 1 | Chapter 2 | Chapter 3 | Chapter 4 | Chapter 5 |  Chapter 6 |  Chapter 7 | 
+| Chapter 1 | Chapter 2 | Chapter 3 | Chapter 4 | Chapter 5 |  Chapter 6 |  Chapter 7 |
 | :--------: | :---------: | :---------: | :---------: |:---------: | :---------: | :---------: |
 |  [算法&数据结构](./algorithm&data-structure) | [前端](./front-end) | [后台](./back-end) | [数据库](./database) | [架构](./architecture) | [区块链](./block-chain) | [计算机基础知识](./foundation) |
